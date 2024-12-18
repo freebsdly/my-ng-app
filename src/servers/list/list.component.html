@@ -1,0 +1,75 @@
+<nz-table
+  #editRowTable
+  nzBordered
+  [nzData]="listOfData"
+  nzTableLayout="fixed"
+  nzShowSizeChanger="true"
+  [nzPageSizeOptions]="pageSizeOptions"
+  nzShowQuickJumper="true"
+  [nzLoading]="loading"
+  (nzCurrentPageDataChange)="onCurrentPageDataChange($event)"
+>
+  <thead>
+    <tr>
+      <th
+        [nzChecked]="checked"
+        [nzIndeterminate]="indeterminate"
+        nzLabel="Select all"
+        (nzCheckedChange)="onAllChecked($event)"
+        nzWidth="4%"
+      ></th>
+      <th nzWidth="25%">Name</th>
+      <th nzWidth="15%">Age</th>
+      <th nzWidth="40%">Address</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (data of editRowTable.data; track data) {
+    <tr>
+      @if (!editCache[data.id].edit) {
+      <td
+        [nzChecked]="setOfCheckedId.has(data.id)"
+        [nzDisabled]="data.disabled"
+        [nzLabel]="data.name"
+        (nzCheckedChange)="onItemChecked(data.id, $event)"
+        c
+      ></td>
+      <td>{{ data.name }}</td>
+      <td>{{ data.age }}</td>
+      <td>{{ data.address }}</td>
+      <td><a (click)="startEdit(data.id)">Edit</a></td>
+      } @else {
+      <td></td>
+      <td>
+        <input
+          type="text"
+          nz-input
+          [(ngModel)]="editCache[data.id].data.name"
+        />
+      </td>
+      <td>
+        <input type="text" nz-input [(ngModel)]="editCache[data.id].data.age" />
+      </td>
+      <td>
+        <input
+          type="text"
+          nz-input
+          [(ngModel)]="editCache[data.id].data.address"
+        />
+      </td>
+      <td>
+        <a
+          nz-popconfirm
+          nzPopconfirmTitle="Sure to save?"
+          (nzOnConfirm)="saveEdit(data.id)"
+          class="save"
+          >Save</a
+        >
+        <a (click)="cancelEdit(data.id)">Cancel</a>
+      </td>
+      }
+    </tr>
+    }
+  </tbody>
+</nz-table>
