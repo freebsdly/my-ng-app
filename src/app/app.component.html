@@ -1,6 +1,25 @@
 <nz-layout>
+  <nav>
+    <ul>
+      <li>
+        <a
+          routerLink="/"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+          >Home</a
+        >
+      </li>
+      <li>
+        <a
+          routerLink="/servers/list"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+          >Server List</a
+        >
+      </li>
+    </ul>
+  </nav>
   <nz-content>
     <router-outlet />
   </nz-content>
 </nz-layout>
-

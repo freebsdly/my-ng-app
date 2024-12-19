@@ -1,13 +1,13 @@
 <div class="operators">
   <nz-space>
-    <button *nzSpaceItem nz-button nzType="primary">
+    <button *nzSpaceItem nz-button nzType="default">
       <i class="ri-add-box-line"></i>
     </button>
     <button
       *nzSpaceItem
       nz-button
       nzType="default"
-      [disabled]="setOfCheckedId.size != 1"
+      [disabled]="setOfCheckedId.size == 0"
     >
       <i class="ri-edit-line"></i>
     </button>
