@@ -4,13 +4,23 @@ import { FormsModule } from '@angular/forms';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzTableModule } from 'ng-zorro-antd/table';
-import { ItemData } from '../../services/servers.service';
-import { timer } from 'rxjs';
+import { ItemData, ServerService } from '../../services/server.service';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzSpaceModule } from 'ng-zorro-antd/space';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [FormsModule, NzInputModule, NzPopconfirmModule, NzTableModule],
+  imports: [
+    FormsModule,
+    NzInputModule,
+    NzPopconfirmModule,
+    NzTableModule,
+    NzButtonModule,
+    NzSpaceModule,
+    NzIconModule,
+  ],
   templateUrl: './list.component.html',
   styleUrl: './list.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -21,9 +31,14 @@ export class ListComponent implements OnInit {
   listOfData: ItemData[] = [];
   listOfCurrentPageData: readonly ItemData[] = [];
   pageSizeOptions = [10, 30, 50, 100];
-  loading = true;
+  loading = false;
   checked = false;
   indeterminate: boolean = false;
+  serverService: ServerService;
+
+  constructor(service: ServerService) {
+    this.serverService = service;
+  }
 
   startEdit(id: string): void {
     this.editCache[id].edit = true;
@@ -89,22 +104,19 @@ export class ListComponent implements OnInit {
     this.refreshCheckedStatus();
   }
 
-  ngOnInit(): void {
-    const data: ItemData[] = [];
-    for (let i = 0; i < 100; i++) {
-      data.push({
-        disabled: false,
-        id: `${i}`,
-        name: `Edward ${i}`,
-        age: 32,
-        address: `London Park no. ${i}`,
-      });
-    }
-    timer(10 * 1000).subscribe(() => {
-      console.log('=-====>');
+  loadData() {
+    this.loading = true;
+    let data = this.serverService.getServers().subscribe({
+      next: (value) => {
+        this.listOfData = value;
+        this.loading = false;
+        this.updateEditCache();
+      },
+      error: (err) => console.error(err),
     });
-    this.listOfData = data;
-    this.loading = false;
-    this.updateEditCache();
+  }
+
+  ngOnInit(): void {
+    this.loadData();
   }
 }

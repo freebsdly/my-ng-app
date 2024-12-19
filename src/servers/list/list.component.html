@@ -1,3 +1,27 @@
+<div class="operators">
+  <nz-space>
+    <button *nzSpaceItem nz-button nzType="primary">
+      <i class="ri-add-box-line"></i>
+    </button>
+    <button
+      *nzSpaceItem
+      nz-button
+      nzType="default"
+      [disabled]="setOfCheckedId.size != 1"
+    >
+      <i class="ri-edit-line"></i>
+    </button>
+    <button
+      *nzSpaceItem
+      nz-button
+      nzType="primary"
+      nzDanger
+      [disabled]="setOfCheckedId.size == 0"
+    >
+      <i class="ri-delete-bin-line"></i>
+    </button>
+  </nz-space>
+</div>
 <nz-table
   #editRowTable
   nzBordered
@@ -20,12 +44,12 @@
       ></th>
       <th nzWidth="25%">Name</th>
       <th nzWidth="15%">Age</th>
-      <th nzWidth="40%">Address</th>
-      <th>Action</th>
+      <th>Address</th>
+      <th nzWidth="10%">Action</th>
     </tr>
   </thead>
   <tbody>
-    @for (data of editRowTable.data; track data) {
+    @for (data of editRowTable.data; track data.id) {
     <tr>
       @if (!editCache[data.id].edit) {
       <td

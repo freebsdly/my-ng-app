@@ -1,3 +1,9 @@
 .save {
   margin-right: 8px;
 }
+
+.operators {
+  padding: 8px;
+  display: grid;
+  justify-items: right;
+}
