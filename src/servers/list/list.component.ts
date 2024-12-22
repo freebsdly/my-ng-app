@@ -8,6 +8,8 @@ import { ItemData, ServerService } from '../../services/server.service';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { CommonService } from '../../services/common.service';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 
 @Component({
   selector: 'app-list',
@@ -20,6 +22,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     NzButtonModule,
     NzSpaceModule,
     NzIconModule,
+    NzDatePickerModule,
   ],
   templateUrl: './list.component.html',
   styleUrl: './list.component.css',
@@ -35,9 +38,15 @@ export class ListComponent implements OnInit {
   checked = false;
   indeterminate: boolean = false;
   serverService: ServerService;
+  commonService: CommonService;
 
-  constructor(service: ServerService) {
+  constructor(common: CommonService, service: ServerService) {
     this.serverService = service;
+    this.commonService = common;
+  }
+
+  onNextRebootTimeChange($event: any, id: string) {
+    console.log($event, id)
   }
 
   startEdit(id: string): void {
@@ -117,6 +126,13 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.commonService.getPageOptions().subscribe({
+      next: (value) => (this.pageSizeOptions = value.pageSizeOptions),
+      error: (err) => {
+        console.error(err);
+        this.pageSizeOptions = [10, 20, 30];
+      },
+    });
     this.loadData();
   }
 }

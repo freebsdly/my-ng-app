@@ -42,9 +42,11 @@
         (nzCheckedChange)="onAllChecked($event)"
         nzWidth="4%"
       ></th>
-      <th nzWidth="25%">Name</th>
-      <th nzWidth="15%">Age</th>
-      <th>Address</th>
+      <th nzWidth="10%">Hostname</th>
+      <th nzWidth="10%">Age</th>
+      <th>Ip Address</th>
+      <th nzWidth="10%">Last Reboot Time</th>
+      <th nzWidth="10%">Next Reboot Time</th>
       <th nzWidth="10%">Action</th>
     </tr>
   </thead>
@@ -62,6 +64,8 @@
       <td>{{ data.name }}</td>
       <td>{{ data.age }}</td>
       <td>{{ data.address }}</td>
+      <td>{{data.lastRebootTime}}</td>
+      <td>{{data.nextRebootTime}}</td>
       <td><a (click)="startEdit(data.id)">Edit</a></td>
       } @else {
       <td></td>
@@ -81,6 +85,10 @@
           nz-input
           [(ngModel)]="editCache[data.id].data.address"
         />
+      </td>
+      <td>{{data.lastRebootTime}}</td>
+      <td>
+        <nz-date-picker [(ngModel)]="editCache[data.id].data.nextRebootTime" (ngModelChange)="onNextRebootTimeChange($event, data.id)"></nz-date-picker>
       </td>
       <td>
         <a

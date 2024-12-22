@@ -7,6 +7,8 @@ export interface ItemData {
   name: string;
   age: number;
   address: string;
+  lastRebootTime: string;
+  nextRebootTime: string;
 }
 
 @Injectable({
@@ -24,6 +26,8 @@ export class ServerService {
         name: `Edward ${i}`,
         age: 32,
         address: `London Park no. ${i}`,
+        lastRebootTime: "2024-05-03 17:18:20",
+        nextRebootTime: "2024-12-30",
       });
     }
 
