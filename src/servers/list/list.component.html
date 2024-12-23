@@ -42,12 +42,26 @@
         (nzCheckedChange)="onAllChecked($event)"
         nzWidth="4%"
       ></th>
-      <th nzWidth="10%">Hostname</th>
-      <th nzWidth="10%">Age</th>
-      <th>Ip Address</th>
-      <th nzWidth="10%">Last Reboot Time</th>
-      <th nzWidth="10%">Next Reboot Time</th>
-      <th nzWidth="10%">Action</th>
+      <th i18n="server list|hostname@@server.list.hostname" nzWidth="10%">
+        Hostname
+      </th>
+      <th i18n="server list|model@@server.list.model" nzWidth="10%">Model</th>
+      <th i18n="server list|ip address@@server.list.ip_address">Ip Address</th>
+      <th
+        i18n="server list|last reboot time@@server.list.last_reboot_time"
+        nzWidth="10%"
+      >
+        Last Reboot Time
+      </th>
+      <th
+        i18n="server list|next reboot time@@server.list.next_reboot_time"
+        nzWidth="10%"
+      >
+        Next Reboot Time
+      </th>
+      <th i18n="server list|actions@@server.list.actions" nzWidth="10%">
+        Action
+      </th>
     </tr>
   </thead>
   <tbody>
@@ -72,7 +86,8 @@
       </td>
       <td>{{ data.lastRebootTime }}</td>
       <td>{{ data.nextRebootTime }}</td>
-      <td><a (click)="startEdit(data.id)">Edit</a></td>
+      <td><a i18n="
+        server list|actions: edit@@server.list.actions.edit" (click)="startEdit(data.id)">Edit</a></td>
       } @else {
       <td></td>
       <td>
@@ -103,13 +118,21 @@
       </td>
       <td>
         <a
+          i18n="
+            server list|actions: edit title@@server.list.actions.edit.save"
+          i18n-nzPopconfirmTitle="
+            server list|actions: edit@@server.list.actions.edit.save.title"
           nz-popconfirm
           nzPopconfirmTitle="Sure to save?"
           (nzOnConfirm)="saveEdit(data.id)"
           class="save"
           >Save</a
         >
-        <a (click)="cancelEdit(data.id)">Cancel</a>
+        <a
+          i18n="server list|actions: edit@@server.list.actions.edit.cancel"
+          (click)="cancelEdit(data.id)"
+          >Cancel</a
+        >
       </td>
       }
     </tr>

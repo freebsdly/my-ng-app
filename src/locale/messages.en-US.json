@@ -1,0 +1,14 @@
+{
+  "locale": "en-US",
+  "translations": {
+    "server.list.hostname": " Hostname ",
+    "server.list.model": "Model",
+    "server.list.ip_address": "Ip Address",
+    "server.list.last_reboot_time": " Last Reboot Time ",
+    "server.list.next_reboot_time": " Next Reboot Time ",
+    "server.list.actions": " Action ",
+    "server.list.actions.edit.save.title": "Sure to save?",
+    "server.list.actions.edit.save": "Save",
+    "server.list.actions.edit.cancel": "Cancel"
+  }
+}

@@ -9,16 +9,23 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "zh": {
+            "translation": "src/locale/messages.zh.json"
+          }
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "localize": true,
             "outputPath": "dist/my-app",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js", "@angular/localize/init"],
             "tsConfig": "tsconfig.app.json",
             "assets": [
               {
@@ -26,12 +33,16 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.css"
-            ],
+            "styles": ["src/styles.css"],
             "scripts": []
           },
           "configurations": {
+            "zh": {
+              "localize": ["zh"]
+            },
+            "en": {
+              "localize": ["en-US"]
+            },
             "production": {
               "budgets": [
                 {
@@ -58,6 +69,12 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
+            "zh": {
+              "buildTarget": "my-app:build:zh"
+            },
+            "en": {
+              "buildTarget": "my-app:build:en"
+            },
             "production": {
               "buildTarget": "my-app:build:production"
             },
@@ -65,7 +82,7 @@
               "buildTarget": "my-app:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development,zh"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n"
@@ -75,7 +92,8 @@
           "options": {
             "polyfills": [
               "zone.js",
-              "zone.js/testing"
+              "zone.js/testing",
+              "@angular/localize/init"
             ],
             "tsConfig": "tsconfig.spec.json",
             "assets": [
@@ -84,9 +102,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.css"
-            ],
+            "styles": ["src/styles.css"],
             "scripts": []
           }
         }
