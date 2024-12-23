@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 
 @Component({
   selector: 'app-dict-selector',
@@ -8,4 +15,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrl: './dict-selector.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DictSelectorComponent {}
+export class DictSelectorComponent implements OnInit {
+  ngOnInit() {}
+}

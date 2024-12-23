@@ -8,6 +8,7 @@
       nz-button
       nzType="default"
       [disabled]="setOfCheckedId.size == 0"
+      (click)="showServerModifier()"
     >
       <i class="ri-edit-line"></i>
     </button>
@@ -138,4 +139,5 @@
     </tr>
     }
   </tbody>
-</nz-table>
+</nz-table>c
+<app-server-modifier [(visible)]="showModifier" />

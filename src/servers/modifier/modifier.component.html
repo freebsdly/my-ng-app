@@ -1,4 +1,10 @@
-<nz-modal [(nzVisible)]="visible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+<nz-modal
+  [(nzVisible)]="visible"
+  i18n-nzTitle="server modifier|server modifier title@@server.modifier.title"
+  nzTitle="Batch Modify Servers"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+>
   <ng-container *nzModalContent>
     <p>Content one</p>
     <p>Content two</p>

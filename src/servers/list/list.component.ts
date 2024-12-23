@@ -11,9 +11,10 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { CommonService } from '../../services/common.service';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { IpSelectorComponent } from '../../common/ip-selector/ip-selector.component';
+import { ModifierComponent } from '../modifier/modifier.component';
 
 @Component({
-  selector: 'app-list',
+  selector: 'app-server-list',
   standalone: true,
   imports: [
     FormsModule,
@@ -25,6 +26,7 @@ import { IpSelectorComponent } from '../../common/ip-selector/ip-selector.compon
     NzIconModule,
     NzDatePickerModule,
     IpSelectorComponent,
+    ModifierComponent,
   ],
   templateUrl: './list.component.html',
   styleUrl: './list.component.css',
@@ -41,6 +43,7 @@ export class ListComponent implements OnInit {
   indeterminate: boolean = false;
   serverService: ServerService;
   commonService: CommonService;
+  showModifier: boolean = false;
 
   constructor(common: CommonService, service: ServerService) {
     this.serverService = service;
@@ -136,5 +139,9 @@ export class ListComponent implements OnInit {
       },
     });
     this.loadData();
+  }
+
+  showServerModifier() {
+    this.showModifier = true;
   }
 }

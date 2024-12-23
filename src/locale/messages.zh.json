@@ -1,15 +1,17 @@
 {
   "locale": "zh",
   "translations": {
+    "ip.selector.loading_data": "加载数据",
     "server.list.hostname": "主机名",
     "server.list.model": "模型",
-    "server.list.ip_address": "Ip地址",
+    "server.list.ip_address": "网络地址",
     "server.list.last_reboot_time": "最近一次重启时间",
     "server.list.next_reboot_time": "计划下次重启时间",
     "server.list.actions": "操作",
     "server.list.actions.edit": "修改",
     "server.list.actions.edit.save.title": "确定保存？",
     "server.list.actions.edit.save": "保存",
-    "server.list.actions.edit.cancel": "取消"
+    "server.list.actions.edit.cancel": "取消",
+    "server.modifier.title": "批量修改服务器属性"
   }
 }

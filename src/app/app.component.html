@@ -1,12 +1,12 @@
 <nz-layout>
-  <nav>
-    <ul>
-      <li>
+  <nz-header>
+    <ul nz-menu nzMode="horizontal">
+      <li nz-menu-item nzTitle="Home">
         <a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page"
           >Home</a
         >
       </li>
-      <li>
+      <li nz-menu-item nzTitle="Server List">
         <a
           routerLink="/servers/list"
           routerLinkActive="active"
@@ -15,7 +15,7 @@
         >
       </li>
     </ul>
-  </nav>
+  </nz-header>
   <nz-content>
     <router-outlet />
   </nz-content>

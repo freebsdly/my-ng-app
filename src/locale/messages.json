@@ -1,6 +1,7 @@
 {
   "locale": "en-US",
   "translations": {
+    "ip.selector.loading_data": " Loading Data ",
     "server.list.hostname": " Hostname ",
     "server.list.model": "Model",
     "server.list.ip_address": "Ip Address",
@@ -10,6 +11,7 @@
     "server.list.actions.edit": "Edit",
     "server.list.actions.edit.save.title": "Sure to save?",
     "server.list.actions.edit.save": "Save",
-    "server.list.actions.edit.cancel": "Cancel"
+    "server.list.actions.edit.cancel": "Cancel",
+    "server.modifier.title": "Batch Modify Servers"
   }
 }
