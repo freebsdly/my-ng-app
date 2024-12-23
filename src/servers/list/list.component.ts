@@ -4,12 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzTableModule } from 'ng-zorro-antd/table';
-import { ItemData, ServerService } from '../../services/server.service';
+import { ServerInfo, ServerService } from '../../services/server.service';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { CommonService } from '../../services/common.service';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { IpSelectorComponent } from '../../common/ip-selector/ip-selector.component';
 
 @Component({
   selector: 'app-list',
@@ -23,6 +24,7 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
     NzSpaceModule,
     NzIconModule,
     NzDatePickerModule,
+    IpSelectorComponent,
   ],
   templateUrl: './list.component.html',
   styleUrl: './list.component.css',
@@ -30,9 +32,9 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 })
 export class ListComponent implements OnInit {
   setOfCheckedId = new Set<string>();
-  editCache: { [key: string]: { edit: boolean; data: ItemData } } = {};
-  listOfData: ItemData[] = [];
-  listOfCurrentPageData: readonly ItemData[] = [];
+  editCache: { [key: string]: { edit: boolean; data: ServerInfo } } = {};
+  listOfData: ServerInfo[] = [];
+  listOfCurrentPageData: readonly ServerInfo[] = [];
   pageSizeOptions = [10, 30, 50, 100];
   loading = false;
   checked = false;
@@ -46,7 +48,7 @@ export class ListComponent implements OnInit {
   }
 
   onNextRebootTimeChange($event: any, id: string) {
-    console.log($event, id)
+    console.log($event, id);
   }
 
   startEdit(id: string): void {
@@ -108,7 +110,7 @@ export class ListComponent implements OnInit {
     this.refreshCheckedStatus();
   }
 
-  onCurrentPageDataChange(listOfCurrentPageData: readonly ItemData[]): void {
+  onCurrentPageDataChange(listOfCurrentPageData: readonly ServerInfo[]): void {
     this.listOfCurrentPageData = listOfCurrentPageData;
     this.refreshCheckedStatus();
   }

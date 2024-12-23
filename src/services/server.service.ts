@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { delay, Observable, observeOn, of, animationFrameScheduler } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
-export interface ItemData {
+export interface ServerInfo {
   disabled: boolean;
   id: string;
   name: string;
-  age: number;
-  address: string;
+  model: string;
+  ipAddresses: string[];
   lastRebootTime: string;
   nextRebootTime: string;
 }
@@ -17,17 +17,17 @@ export interface ItemData {
 export class ServerService {
   constructor() {}
 
-  getServers(): Observable<ItemData[]> {
-    const data: ItemData[] = [];
-    for (let i = 0; i < 100; i++) {
+  getServers(): Observable<ServerInfo[]> {
+    const data: ServerInfo[] = [];
+    for (let i = 1; i <= 100; i++) {
       data.push({
         disabled: false,
         id: `${i}`,
         name: `Edward ${i}`,
-        age: 32,
-        address: `London Park no. ${i}`,
-        lastRebootTime: "2024-05-03 17:18:20",
-        nextRebootTime: "2024-12-30",
+        model: 'Hardware Server',
+        ipAddresses: [`10.128.255.${i}`, `10.128.255.${i + 1}`],
+        lastRebootTime: '2024-05-03 17:18:20',
+        nextRebootTime: '2024-12-30',
       });
     }
 

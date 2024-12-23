@@ -7,7 +7,7 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
   standalone: true,
   imports: [RouterOutlet, RouterLink, RouterLinkActive, NzLayoutModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
   title = 'my-app';

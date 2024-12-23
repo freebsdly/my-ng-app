@@ -1,0 +1,22 @@
+<nz-select
+  nzMode="multiple"
+  [(ngModel)]="selectedIps"
+  nzPlaceHolder="Please select"
+  [nzServerSearch]="isServerSearch"
+  [nzAutoClearSearchValue]="autoClearSearchValue"
+  [nzAllowClear]="allowClear"
+  [nzShowSearch]="showSearch"
+  (nzOnSearch)="onSearch($event)"
+  (ngModelChange)="onSelectedOptionsChange($event)"
+>
+  @if (!loading) { @for (option of listOfIps; track option.ip) {
+  <nz-option
+    [nzKey]="option.ip"
+    [nzLabel]="option.ip"
+    [nzValue]="option.ip"
+    [nzDisabled]="option.canReused"
+  ></nz-option>
+  } } @else {
+  <nz-option nzDisabled nzCustomContent> Loading Data... </nz-option>
+  }
+</nz-select>
