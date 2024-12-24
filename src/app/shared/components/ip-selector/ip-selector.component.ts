@@ -5,9 +5,9 @@ import {
   IpInfo,
   IpInfoQueryOptions,
   IpService,
-} from '../../services/ip.service';
+} from '@/shared/services/ip.service';
 import { BehaviorSubject, debounceTime, switchMap } from 'rxjs';
-import { CommonService } from '../../services/common.service';
+import { CommonService } from '@/shared/services/common.service';
 
 @Component({
   standalone: true,

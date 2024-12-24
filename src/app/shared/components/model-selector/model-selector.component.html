@@ -1,0 +1,31 @@
+<nz-select
+  i18n-nzPlaceHolder="model selector|select model@@model.selector.place_holder"
+  [(ngModel)]="selectedModel"
+  nzPlaceHolder="Please select"
+  [nzServerSearch]="isServerSearch"
+  [nzAutoClearSearchValue]="autoClearSearchValue"
+  [nzAllowClear]="allowClear"
+  [nzShowSearch]="showSearch"
+  (nzOnSearch)="onSearch($event)"
+  (ngModelChange)="onSelectedOptionsChange($event)"
+>
+  @if (!loading) { @for (entity of listOfGroups; track entity.group) {
+  <nz-option-group [nzLabel]="entity.group">
+    @for (info of entity.infos; track info.id) {
+    <nz-option
+      [nzKey]="info.key"
+      [nzLabel]="info.name"
+      [nzValue]="info.key"
+    ></nz-option>
+    }
+  </nz-option-group>
+  } } @else {
+  <nz-option
+    nzDisabled
+    nzCustomContent
+    i18n="model selector|select model@@model.selector.loading_data"
+  >
+    Loading Data
+  </nz-option>
+  }
+</nz-select>

@@ -4,14 +4,15 @@ import { FormsModule } from '@angular/forms';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzTableModule } from 'ng-zorro-antd/table';
-import { ServerInfo, ServerService } from '../../services/server.service';
+import { ServerInfo, ServerService } from '@/shared/services/server.service';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { CommonService } from '../../services/common.service';
+import { CommonService } from '@/shared/services/common.service';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
-import { IpSelectorComponent } from '../../common/ip-selector/ip-selector.component';
-import { ModifierComponent } from '../modifier/modifier.component';
+import { IpSelectorComponent } from '@/shared/components/ip-selector/ip-selector.component';
+import { ModifierComponent } from '@/features/servers/modifier/modifier.component';
+import { ModelSelectorComponent } from '@/shared/components/model-selector/model-selector.component';
 
 @Component({
   selector: 'app-server-list',
@@ -27,6 +28,7 @@ import { ModifierComponent } from '../modifier/modifier.component';
     NzDatePickerModule,
     IpSelectorComponent,
     ModifierComponent,
+    ModelSelectorComponent,
   ],
   templateUrl: './list.component.html',
   styleUrl: './list.component.css',
@@ -120,7 +122,7 @@ export class ListComponent implements OnInit {
 
   loadData() {
     this.loading = true;
-    let data = this.serverService.getServers().subscribe({
+    let data = this.serverService.getServerInfos().subscribe({
       next: (value) => {
         this.listOfData = value;
         this.loading = false;
