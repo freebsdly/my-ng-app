@@ -88,11 +88,20 @@
       <td>{{ data.lastRebootTime }}</td>
       <td>{{ data.nextRebootTime }}</td>
       <td>
-        <a
-          i18n="server list|actions: edit@@server.list.actions.edit"
-          (click)="startEdit(data.id)"
-          >Edit</a
-        >
+        <nz-space>
+          <a
+            *nzSpaceItem
+            i18n="server list|actions: edit@@server.list.actions.edit"
+            (click)="startEdit(data.id)"
+            >Edit</a
+          >
+          <a
+            *nzSpaceItem
+            i18n="server list|actions: detail@@server.list.actions.detail"
+            (click)="showServerDetail()"
+            >Detail</a
+          >
+        </nz-space>
       </td>
       } @else {
       <td></td>
@@ -141,3 +150,4 @@
   </tbody> </nz-table
 >c
 <app-server-modifier [(visible)]="showModifier" />
+<app-detail [visible]="showDetail" />

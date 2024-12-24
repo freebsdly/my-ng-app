@@ -13,6 +13,7 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { IpSelectorComponent } from '@/shared/components/ip-selector/ip-selector.component';
 import { ModifierComponent } from '@/features/servers/modifier/modifier.component';
 import { ModelSelectorComponent } from '@/shared/components/model-selector/model-selector.component';
+import { DetailComponent } from '../detail/detail.component';
 
 @Component({
   selector: 'app-server-list',
@@ -29,6 +30,7 @@ import { ModelSelectorComponent } from '@/shared/components/model-selector/model
     IpSelectorComponent,
     ModifierComponent,
     ModelSelectorComponent,
+    DetailComponent,
   ],
   templateUrl: './list.component.html',
   styleUrl: './list.component.css',
@@ -46,6 +48,7 @@ export class ListComponent implements OnInit {
   serverService: ServerService;
   commonService: CommonService;
   showModifier: boolean = false;
+  showDetail: boolean = false;
 
   constructor(common: CommonService, service: ServerService) {
     this.serverService = service;
@@ -145,5 +148,9 @@ export class ListComponent implements OnInit {
 
   showServerModifier() {
     this.showModifier = true;
+  }
+
+  showServerDetail() {
+    this.showDetail = true;
   }
 }
