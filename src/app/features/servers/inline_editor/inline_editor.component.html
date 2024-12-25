@@ -1,0 +1,36 @@
+<tr>
+  <td></td>
+  <td>
+    <input type="text" nz-input [(ngModel)]="editRecord.name" />
+  </td>
+  <td>
+    <app-model-selector [(selectedModel)]="editRecord.model" />
+  </td>
+  <td>
+    <app-ip-selector [(selectedIps)]="editRecord.ipAddresses" />
+  </td>
+  <td>{{ editRecord.lastRebootTime }}</td>
+  <td>
+    <nz-date-picker
+      [(ngModel)]="editRecord.nextRebootTime"
+      (ngModelChange)="onNextRebootTimeChange($event, editRecord.id)"
+    ></nz-date-picker>
+  </td>
+  <td>
+    <a
+      i18n="server list|actions: edit title@@server.list.actions.edit.save"
+      i18n-nzPopconfirmTitle="
+        server list|actions: edit@@server.list.actions.edit.save.title"
+      nz-popconfirm
+      nzPopconfirmTitle="Sure to save?"
+      (nzOnConfirm)="saveEdit(editRecord.id)"
+      class="save"
+      >Save</a
+    >
+    <a
+      i18n="server list|actions: edit@@server.list.actions.edit.cancel"
+      (click)="cancelEdit(editRecord.id)"
+      >Cancel</a
+    >
+  </td>
+</tr>

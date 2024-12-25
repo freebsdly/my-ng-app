@@ -1,38 +1,59 @@
-<div class="operators">
-  <nz-space>
-    <button *nzSpaceItem nz-button nzType="default">
-      <i class="ri-add-box-line"></i>
-    </button>
-    <button
-      *nzSpaceItem
-      nz-button
-      nzType="default"
-      [disabled]="setOfCheckedId.size == 0"
-      (click)="showServerModifier()"
-    >
-      <i class="ri-edit-line"></i>
-    </button>
-    <button
-      *nzSpaceItem
-      nz-button
-      nzType="primary"
-      nzDanger
-      [disabled]="setOfCheckedId.size == 0"
-    >
-      <i class="ri-delete-bin-line"></i>
-    </button>
-  </nz-space>
+<div nz-row>
+  <div nz-col nzSpan="8">
+    @if(setOfCheckedId.size>0) {
+    <div class="selected-notification">
+      <nz-alert
+        nzType="info"
+        nzShowIcon
+        nzMessage="当前已选择 {{ setOfCheckedId.size }} 条"
+      ></nz-alert>
+    </div>
+    }
+  </div>
+  <div nz-col nzSpan="8"></div>
+  <div nz-col nzSpan="8">
+    <div class="operators">
+      <nz-space>
+        <button *nzSpaceItem nz-button nzType="default">
+          <i class="ri-add-box-line"></i>
+        </button>
+        <button
+          *nzSpaceItem
+          nz-button
+          nzType="default"
+          [disabled]="setOfCheckedId.size == 0"
+          (click)="showServerModifier()"
+        >
+          <i class="ri-edit-line"></i>
+        </button>
+        <button
+          *nzSpaceItem
+          nz-button
+          nzType="primary"
+          nzDanger
+          [disabled]="setOfCheckedId.size == 0"
+        >
+          <i class="ri-delete-bin-line"></i>
+        </button>
+      </nz-space>
+    </div>
+  </div>
 </div>
 <nz-table
   #editRowTable
   nzBordered
   [nzData]="listOfData"
+  [nzTotal]="total"
   nzTableLayout="fixed"
   nzShowSizeChanger="true"
   [nzPageSizeOptions]="pageSizeOptions"
   nzShowQuickJumper="true"
+  [nzFrontPagination]="false"
+  [nzPageSize]="pageSize"
+  [nzPageIndex]="pageIndex"
   [nzLoading]="loading"
   (nzCurrentPageDataChange)="onCurrentPageDataChange($event)"
+  (nzQueryParams)="onQueryParamsChange($event)"
 >
   <thead>
     <tr>
@@ -74,10 +95,9 @@
         [nzDisabled]="data.disabled"
         [nzLabel]="data.name"
         (nzCheckedChange)="onItemChecked(data.id, $event)"
-        c
       ></td>
       <td>{{ data.name }}</td>
-      <td>{{ data.model }}</td>
+      <td>{{ data.model.name }}</td>
       <td>
         <ul>
           @for (ip of editCache[data.id].data.ipAddresses; track ip) {
@@ -147,7 +167,7 @@
       }
     </tr>
     }
-  </tbody> </nz-table
->c
+  </tbody>
+</nz-table>
 <app-server-modifier [(visible)]="showModifier" />
-<app-detail [visible]="showDetail" />
+<app-detail [(visible)]="showDetail" />

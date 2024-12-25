@@ -1,3 +1,4 @@
+
 .save {
   margin-right: 8px;
 }
@@ -6,10 +7,4 @@
   padding: 8px;
   display: grid;
   justify-items: right;
-}
-
-.selected-notification {
-  padding: 8px;
-  display: grid;
-  justify-items: left;
 }

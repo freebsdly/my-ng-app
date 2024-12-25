@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ModelSelectorComponent } from '@/shared/components/model-selector/model-selector.component';
+import { ModelInfo } from '@/shared/services/model.service';
 
 @Component({
   selector: 'app-test',
@@ -10,5 +11,10 @@ import { ModelSelectorComponent } from '@/shared/components/model-selector/model
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TestComponent {
-  selectedModel = "vm";
+  selectedModel: ModelInfo = {
+    id: 1,
+    name: '模型１',
+    key: 'model1',
+    group: 'group1',
+  };
 }

@@ -1,13 +1,14 @@
 <nz-select
   i18n-nzPlaceHolder="model selector|select model@@model.selector.place_holder"
   [(ngModel)]="selectedModel"
+  [compareWith]="compareFn"
   nzPlaceHolder="Please select"
   [nzServerSearch]="isServerSearch"
   [nzAutoClearSearchValue]="autoClearSearchValue"
   [nzAllowClear]="allowClear"
   [nzShowSearch]="showSearch"
   (nzOnSearch)="onSearch($event)"
-  (ngModelChange)="onSelectedOptionsChange($event)"
+  (ngModelChange)="onSelectedModelChange($event)"
 >
   @if (!loading) { @for (entity of listOfGroups; track entity.group) {
   <nz-option-group [nzLabel]="entity.group">
@@ -15,7 +16,7 @@
     <nz-option
       [nzKey]="info.key"
       [nzLabel]="info.name"
-      [nzValue]="info.key"
+      [nzValue]="info"
     ></nz-option>
     }
   </nz-option-group>

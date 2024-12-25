@@ -1,4 +1,16 @@
 nz-header {
   background-color: white;
-  padding: 0px;
+}
+
+/* 在组件的样式文件中 */
+:host ::ng-deep .ant-layout-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000; /* 确保页眉在最上面 */
+}
+
+/* 在组件的样式文件中 */
+:host ::ng-deep .ant-layout-content {
+  padding-top: 64px; /* 根据页眉的高度调整 */
 }

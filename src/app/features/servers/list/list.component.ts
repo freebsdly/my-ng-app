@@ -3,8 +3,12 @@ import { FormsModule } from '@angular/forms';
 
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
-import { NzTableModule } from 'ng-zorro-antd/table';
-import { ServerInfo, ServerService } from '@/shared/services/server.service';
+import { NzTableModule, NzTableQueryParams } from 'ng-zorro-antd/table';
+import {
+  ServerInfo,
+  ServerQueryOptions,
+  ServerService,
+} from '@/shared/services/server.service';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -13,7 +17,9 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { IpSelectorComponent } from '@/shared/components/ip-selector/ip-selector.component';
 import { ModifierComponent } from '@/features/servers/modifier/modifier.component';
 import { ModelSelectorComponent } from '@/shared/components/model-selector/model-selector.component';
-import { DetailComponent } from '../detail/detail.component';
+import { DetailComponent } from '@/features/servers/detail/detail.component';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzAlertModule } from 'ng-zorro-antd/alert';
 
 @Component({
   selector: 'app-server-list',
@@ -31,6 +37,8 @@ import { DetailComponent } from '../detail/detail.component';
     ModifierComponent,
     ModelSelectorComponent,
     DetailComponent,
+    NzGridModule,
+    NzAlertModule
   ],
   templateUrl: './list.component.html',
   styleUrl: './list.component.css',
@@ -49,6 +57,9 @@ export class ListComponent implements OnInit {
   commonService: CommonService;
   showModifier: boolean = false;
   showDetail: boolean = false;
+  total: number = 0;
+  pageSize: number = 10;
+  pageIndex: number = 1;
 
   constructor(common: CommonService, service: ServerService) {
     this.serverService = service;
@@ -123,11 +134,12 @@ export class ListComponent implements OnInit {
     this.refreshCheckedStatus();
   }
 
-  loadData() {
+  loadData(query: ServerQueryOptions) {
     this.loading = true;
-    let data = this.serverService.getServerInfos().subscribe({
+    let data = this.serverService.getServerInfos(query).subscribe({
       next: (value) => {
-        this.listOfData = value;
+        this.listOfData = value.content;
+        this.total = value.total;
         this.loading = false;
         this.updateEditCache();
       },
@@ -143,7 +155,10 @@ export class ListComponent implements OnInit {
         this.pageSizeOptions = [10, 20, 30];
       },
     });
-    this.loadData();
+    this.loadData({
+      pageIndex: this.pageIndex,
+      pageSize: this.pageSize,
+    } as ServerQueryOptions);
   }
 
   showServerModifier() {
@@ -152,5 +167,12 @@ export class ListComponent implements OnInit {
 
   showServerDetail() {
     this.showDetail = true;
+  }
+
+  onQueryParamsChange(params: NzTableQueryParams) {
+    this.loadData({
+      pageIndex: params.pageIndex,
+      pageSize: params.pageSize,
+    } as ServerQueryOptions);
   }
 }

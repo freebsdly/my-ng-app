@@ -1,3 +1,12 @@
-<nz-drawer [nzVisible]="visible" [nzWidth]="640" [nzClosable]="false" (nzOnClose)="close()">
-  details
+<nz-drawer
+  [nzVisible]="visible"
+  [nzClosable]="false"
+  (nzOnClose)="close()"
+  [nzWidth]="'80%'"
+>
+  <ng-container *nzDrawerContent>
+    <p>Some contents...</p>
+    <p>Some contents...</p>
+    <p>Some contents...</p>
+  </ng-container>
 </nz-drawer>

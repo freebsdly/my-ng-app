@@ -18,7 +18,7 @@ import { BehaviorSubject, switchMap } from 'rxjs';
 })
 export class ModelSelectorComponent implements OnInit {
   @Input({ required: true })
-  selectedModel: string = '';
+  selectedModel?: ModelInfo;
   @Output()
   selectedModelChange: EventEmitter<ModelInfo> = new EventEmitter();
   showSearch = true;
@@ -81,7 +81,10 @@ export class ModelSelectorComponent implements OnInit {
     this.searchChange$.next(value);
   }
 
-  onSelectedOptionsChange($event: any) {
+  onSelectedModelChange($event: ModelInfo) {
     this.selectedModelChange.emit($event);
   }
+
+  readonly compareFn = (o1: ModelInfo, o2: ModelInfo): boolean =>
+    o1 && o2 ? o1.id === o2.id : o1 === o2;
 }
