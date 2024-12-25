@@ -1,10 +1,10 @@
 <div nz-row>
   <div nz-col nzSpan="8">
+    <!--TODO: 修复选中记录时显示内容高度大于operators高度导致表格下移问题-->
     @if(setOfCheckedId.size>0) {
     <div class="selected-notification">
       <nz-alert
         nzType="info"
-        nzShowIcon
         nzMessage="当前已选择 {{ setOfCheckedId.size }} 条"
       ></nz-alert>
     </div>
