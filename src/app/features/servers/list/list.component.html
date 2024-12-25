@@ -1,43 +1,36 @@
-<div nz-row>
-  <div nz-col nzSpan="8">
-    <!--TODO: 修复选中记录时显示内容高度大于operators高度导致表格下移问题-->
+<div class="operators">
+  <nz-space>
+    <!--TODO:修复显示选择条数时高度不一致导致表格下移问题-->
     @if(setOfCheckedId.size>0) {
-    <div class="selected-notification">
-      <nz-alert
-        nzType="info"
-        nzMessage="当前已选择 {{ setOfCheckedId.size }} 条"
-      ></nz-alert>
-    </div>
+    <nz-alert
+      *nzSpaceItem
+      nzType="info"
+      nzShowIcon
+      nzMessage="当前已选择 {{ setOfCheckedId.size }} 条"
+    ></nz-alert>
     }
-  </div>
-  <div nz-col nzSpan="8"></div>
-  <div nz-col nzSpan="8">
-    <div class="operators">
-      <nz-space>
-        <button *nzSpaceItem nz-button nzType="default">
-          <i class="ri-add-box-line"></i>
-        </button>
-        <button
-          *nzSpaceItem
-          nz-button
-          nzType="default"
-          [disabled]="setOfCheckedId.size == 0"
-          (click)="showServerModifier()"
-        >
-          <i class="ri-edit-line"></i>
-        </button>
-        <button
-          *nzSpaceItem
-          nz-button
-          nzType="primary"
-          nzDanger
-          [disabled]="setOfCheckedId.size == 0"
-        >
-          <i class="ri-delete-bin-line"></i>
-        </button>
-      </nz-space>
-    </div>
-  </div>
+    <button *nzSpaceItem nz-button nzType="default">
+      <i class="ri-add-box-line"></i>
+    </button>
+    <button
+      *nzSpaceItem
+      nz-button
+      nzType="default"
+      [disabled]="setOfCheckedId.size == 0"
+      (click)="showServerModifier()"
+    >
+      <i class="ri-edit-line"></i>
+    </button>
+    <button
+      *nzSpaceItem
+      nz-button
+      nzType="primary"
+      nzDanger
+      [disabled]="setOfCheckedId.size == 0"
+    >
+      <i class="ri-delete-bin-line"></i>
+    </button>
+  </nz-space>
 </div>
 <nz-table
   #editRowTable
